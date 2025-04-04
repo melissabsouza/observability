@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<body>
+<!-- src/main/resources/templates/fragments/footer.html -->
+<footer th:fragment="footer">
+    <p>The locale is <span th:text="${#locale.language}"></span>.</p>
+    <p><span th:text="#{texto.copyrights}">FOTTER TEXT</span></p>
+</footer>
+
+</body>
+</html>

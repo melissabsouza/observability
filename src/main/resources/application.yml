@@ -1,0 +1,75 @@
+server:
+  port: ${SERVER_PORT:8080}
+
+management:
+  endpoints:
+    health:
+      show-details: always
+    web:
+      exposure:
+        include: "*"
+
+info:
+  app:
+    name: eCommerce
+    version: 1.0.0
+
+spring:
+  application:
+    name: ecommerce-thymeleaf
+  thymeleaf:
+    cache: false
+  http:
+    encoding:
+      charset: UTF-8
+  jpa:
+    open-in-view: true
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        format_sql: true
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+  mail:
+    host: localhost
+    port: 1025
+    properties:
+      mail:
+        smtp:
+          auth: False
+
+
+
+  datasource:
+    url: jdbc:h2:mem:testdb
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+  messages:
+      encoding: UTF-8
+      basename: messages
+  h2:
+    console:
+      enabled: true
+      path: /h2-console  # Caminho para acessar o console H2 no navegador
+    show-sql: true  # To show SQL queries in the console (optional)
+    # open-in-view: false  # Best practice to disable Open Session in View pattern
+  devtools:
+    restart:
+      enabled: true
+logging:
+  level:
+    root: INFO
+    br: DEBUG
+    org:
+      hibernate:
+        SQL: DEBUG         # Ativa o log das SQL queries
+        type:
+          descriptor:
+            sql:
+              BasicBinder: TRACE  # Mostra parâmetros das queries

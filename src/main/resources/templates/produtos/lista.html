@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title >TITLE</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 p-6">
+    <div th:replace="~{fragments/header :: header}">
+        MENU NO HEADER
+    </div>
+    <div class="container mx-auto">
+        <h1 class="text-3xl font-bold mb-6 text-center" th:text="#{produtos.titulo}">Lista de Produtos</h1>
+
+        <div class="text-center mt-8">
+            <a th:href="@{/produtos/novo}" class="text-blue-600 font-semibold hover:underline" th:text="#{produtos.novo}">Novo Produto</a>
+        </div>
+
+        <div class="bg-white p-6 rounded-lg shadow-md">
+            <table bclass="w-full border-collapse">
+                <thead>
+                    <tr class="bg-blue-600 text-white">
+                        <th class="p-3 text-left" th:text="#{produto.id}">ID</th>
+                        <th class="p-3 text-left" th:text="#{produto.nome}">Nome</th>
+                        <th class="p-3 text-left" th:text="#{produto.preco}">Preço</th>
+                        <th class="p-3 text-left" th:text="#{page.acoes}">Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="border-b" th:each="produto : ${produtos}">
+                            <td class="p-3" th:text="${produto.uuid}">UUID</td>
+                            <td class="p-3" th:text="${produto.nome}">NOME</td>
+                            <td class="p-3" th:text="${#numbers.formatDecimal(produto.preco,1,1)}"
+                                th:classappend="${produto.preco > 10} ? 'bg-red-100 font-bold' : ''">PRECO</td>
+
+                            <td class="p-3">
+                                <a class="text-blue-600 hover:underline" th:href="@{/produtos/editar/{id}(id=${produto.uuid})}">Editar</a>
+                                <a class="text-blue-600 hover:underline" th:href="@{/produtos/deletar/{id}(id=${produto.uuid})}">Deletar</a>
+                            </td>
+
+                    </tr>
+                </tbody>
+
+            </table>
+        </div>
+
+    </div>
+
+    <div th:replace="~{fragments/footer :: footer}">
+        &copy; 2025 TEXTO FOOTER
+    </div>
+
+
+</body>
+</html>

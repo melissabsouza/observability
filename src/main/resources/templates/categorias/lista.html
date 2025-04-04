@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Lista de Categorias</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .hamburger {
+            transition: transform 0.3s ease;
+        }
+        .hamburger.active {
+            transform: rotate(90deg);
+        }
+    </style>
+</head>
+<body class="bg-gray-100 p-6">
+<div th:insert="~{fragments/header :: header}">
+    MENU NO HEADER
+</div>
+<div class="container mx-auto">
+
+    <h1 class="text-3xl font-bold mb-6 text-center" th:text="#{categoria.titulo}">Lista de XXX</h1>
+
+    <div class="text-center mt-8">
+        <a th:href="@{/categorias/nova}" class="text-blue-600 font-semibold hover:underline" th:text="#{categoria.lista.nova}">Nova Categoria</a>
+    </div>
+
+    <div class="bg-white p-6 rounded-lg shadow-md">
+        <table bclass="w-full border-collapse">
+            <thead>
+            <tr class="bg-blue-600 text-white">
+                <th class="p-3 text-left" th:text="#{categoria.id}">ID</th>
+                <th class="p-3 text-left" th:text="#{categoria.nome}">Nome</th>
+                <th class="p-3 text-left" th:text="#{categoria.dataAlteracao}">Data Alteração</th>
+                <th class="p-3 text-left" th:text="#{page.acoes}">Ações</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr class="border-b" th:each="categoria : ${categorias}">
+                <td class="p-3" th:text="${categoria.id}">ID</td>
+                <td class="p-3" th:text="${categoria.nome}">NOME</td>
+                <td class="p-3" th:text="${#dates.format(categoria.dataAlteracao.toInstant(), 'dd-MM-yyyy HH:mm:ss')}">DATA ALTERACAO</td>
+                <td class="p-3">
+                    <a class="text-blue-600 hover:underline" th:href="@{/categorias/editar/{id}(id=${categoria.id})}">Editar</a>
+                    <a class="text-blue-600 hover:underline" th:href="@{/categorias/deletar/{id}(id=${categoria.id})}">Deletar</a>
+                </td>
+
+            </tr>
+            </tbody>
+
+        </table>
+    </div>
+
+</div>
+<div th:replace="~{fragments/footer :: footer}">
+    &copy; 2025 TEXTO FOOTER
+</div>
+
+
+</body>
+</html>
